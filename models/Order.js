@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const ProductSchema = new mongoose.Schema(
   {
     customer: {
-      type: string,
+      type: String,
       required: true,
       maxlength: 60,
     },
     address: {
-      type: string,
+      type: String,
       required: true,
       maxlength: 200,
     },

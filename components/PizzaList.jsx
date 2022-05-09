@@ -1,7 +1,7 @@
 import styles from '../styles/PizzaList.module.css';
 import PizzaCard from './PizzaCard';
 
-const PizzaList = () => {
+const PizzaList = ({ pizzaList }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>THE BEST PIZZA IN HUAM</h1>
@@ -12,14 +12,10 @@ const PizzaList = () => {
         voluptatem.
       </p>
       <div className={styles.wrapper}>
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
+        {/* pizzaList props이용하여 컴포넌트 렌더링 */}
+        {pizzaList.map((pizza) => (
+          <PizzaCard key={pizza._id} pizza={pizza} />
+        ))}
       </div>
     </div>
   );

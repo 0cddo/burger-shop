@@ -1,11 +1,11 @@
+import axios from 'axios';
 import Head from 'next/head';
 import Image from 'next/image';
 import Featured from '../components/Featured';
-import Footer from '../components/Footer';
 import PizzaList from '../components/PizzaList';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ pizzaList }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +14,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
-      <PizzaList />
+      <PizzaList pizzaList={pizzaList} />
     </div>
   );
 }
+
+// nextjs 는 server side rendering -> 모든 데이터를 fetch
+export const getServerSideProps = async () => {
+  const res = await axios.get('http://localhost:3000/api/products');
+  // props 생성, nextjs에서 일부 props만 렌더링 될 수 있게 함
+  return {
+    props: {
+      pizzaList: res.data,
+    },
+  };
+};

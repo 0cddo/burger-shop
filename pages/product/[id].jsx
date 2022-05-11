@@ -19,6 +19,12 @@ const Product = ({ pizza }) => {
 
   const handleChange = (e, option) => {
     const checked = e.target.checked;
+
+    if (checked) {
+      changePrice(option.price);
+    } else {
+      changePrice(-option.price);
+    }
   };
 
   return (
@@ -30,7 +36,7 @@ const Product = ({ pizza }) => {
       </div>
       <div className={styles.right}>
         <h1 className={styles.title}>{pizza.title}</h1>
-        <span className={styles.price}>${pizza.prices[size]}</span>
+        <span className={styles.price}>${price}</span>
         <p className={styles.desc}>{pizza.desc}</p>
         <h3 className={styles.choose}>Choose the size</h3>
         <div className={styles.sizes}>

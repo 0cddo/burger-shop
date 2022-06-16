@@ -15,7 +15,9 @@ const cartSlice = createSlice({
       // quantity: 전체 갯수 아님, 피자 하나당 선택 갯수임
       state.totalPrice += action.payload.price * action.payload.quantity;
     },
-    reset: (state) => (state = initialState),
+    reset: (state) => {
+      (state.products = []), (state.totalQuantity = 0), (state.totalPrice = 0);
+    },
   },
 });
 

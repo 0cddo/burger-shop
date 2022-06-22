@@ -118,7 +118,19 @@ const Index = ({ products, orders }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  // 요청값 쿠키에 토큰 유무 확인 (ctx.req?.cookies => undefined면 안됨)
+  const myCookie = ctx.req?.cookies || '';
+
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination: 'admin/login',
+        permanent: false,
+      },
+    };
+  }
+
   const productRes = await axios.get('http://localhost:3000/api/products');
   const orderRes = await axios.get('http://localhost:3000/api/orders');
 

@@ -34,7 +34,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  const res = await axios.get('http://localhost:3000/api/products');
+  const res = await axios.get(`${process.env.SERVER_URL}/api/products`);
   // props 생성, nextjs에서 일부 props만 렌더링 될 수 있게 함
   return {
     props: {
